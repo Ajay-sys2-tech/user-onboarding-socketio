@@ -20,6 +20,10 @@ socketServer(server); // Attach Socket.io
 app.use('/api/auth', authRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/onboarding', onboardingRoutes);
+app.get('/', (req, res) => {
+    res.send('Welcome to the User Onboarding API');
+});
+
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
