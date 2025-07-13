@@ -32,7 +32,7 @@ module.exports = (server) => {
     if (!token) return next(new Error('Authentication error'));
 
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.USER_JWT_SECRET);
       socket.userId = decoded.id;
       next();
     } catch (err) {
