@@ -3,7 +3,8 @@ const Answer = require('../models/Answer');
 const User = require('../models/User');
 
 module.exports = (socket) => {
-  socket.on('start_onboarding', async ({ userId }) => {
+  socket.on('start_onboarding', async () => {
+    const userId = socket.userId;
     console.log(`User ${userId} started onboarding`);
    
     try {
@@ -42,7 +43,8 @@ module.exports = (socket) => {
       socket.emit('payload_error', { message: 'Invalid payload data' });
       return;
    }
-    const { userId, questionId, answer, questionNumber } = data;
+    const { questionId, answer, questionNumber } = data;
+    const userId = socket.userId;
     console.log(`User ${userId} answered question ${questionId}: ${answer}`);
 
     if( !userId || !questionId || answer === undefined || questionNumber === undefined) {
