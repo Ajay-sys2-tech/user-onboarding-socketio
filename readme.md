@@ -11,16 +11,12 @@ A real-time chat onboarding backend server built with **Node.js**, **Express**, 
 - [Tech Stack](#tech-stack)  
 - [Getting Started](#getting-started)  
   - [Prerequisites](#prerequisites)  
-  - [Installation](#installation)  
+  - [Installation](#installation) 
+  - [Database seeding](#database-seeding)
   - [Running the Server](#running-the-server)  
-- [API & Socket Events](#api--socket-events)  
-  - [Authentication (JWT)](#authentication-jwt)  
-  - [Socket.io Events](#socketio-events)  
-- [Error Handling](#error-handling)  
-- [Client Integration Notes](#client-integration-notes)  
-- [Testing with Postman](#testing-with-postman)  
-- [Disconnecting Clients](#disconnecting-clients)  
-- [Contributing](#contributing)  
+- [API Routes Table](#api-routes-table)
+- [API Payload](#api-payload)   
+- [Socket Events](#socket-events)  
 - [License](#license)  
 
 ---
@@ -68,10 +64,7 @@ This backend server supports an onboarding chat interface where users answer pre
 git clone https://github.com/Ajay-sys2-tech/user-onboarding-socketio.git
 cd user-onboarding-socketio
 npm install
-npm run dev
 ```
-
----
 
 ### Database seeding
 
@@ -81,6 +74,19 @@ npm run seed:question
 ```
 
 ---
+
+### Running the Server
+- dev
+```bash
+npm run dev
+```
+- prod 
+```bash
+npm run start
+```
+
+---
+
 
 ## API Routes Table
 
@@ -99,6 +105,36 @@ npm run seed:question
 
 ---
 
+
+## API Payload
+### Signup (`POST /api/auth/signup`)
+
+```json
+{
+  "username": "testuser",
+  "password": "TestPassword123",
+  "role": "admin"
+}
+```
+
+- `role` is optional for user. If omitted, the default role which is "user" will be assigned.
+
+---
+
+### Login (`POST /api/auth/login`)
+
+```json
+{
+  "username": "testuser",
+  "password": "TestPassword123",
+  "role": "admin"
+}
+```
+
+- `role` is optional for user.
+
+---
+
 ## Socket Events
 | Event Name         | Direction | Payload (example)                                         | Emits/Receives (by server)         | Description                                      |
 |--------------------|-----------|----------------------------------------------------------|------------------------------------|--------------------------------------------------|
@@ -108,5 +144,6 @@ npm run seed:question
 | question           | Server → Client | `{ questionNumber, questionId, text, type, options }` | -                                  | Sends next onboarding question                   |
 | complete           | Server → Client | `{ message }`                                         | -                                  | Notifies onboarding is complete                  |
 | error              | Server → Client | `{ message }`                                         | -                                  | Notifies of a server-side error                  |
-| payload_error      | Server → Client | `{ message }`                                         | -                                  | Notifies of invalid payload from
+| payload_error      | Server → Client | `{ message }`                                         | -                                  | Notifies of invalid payload from client          |
 
+---
