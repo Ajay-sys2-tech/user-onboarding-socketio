@@ -28,7 +28,7 @@ module.exports = (server) => {
   // Authentication middleware
   io.use((socket, next) => {
     // const token = socket.handshake.auth.token;
-    const token = socket.handshake.headers.access_token;
+    const token = socket.handshake.headers.token;
     if (!token) return next(new Error('Authentication error'));
 
     try {

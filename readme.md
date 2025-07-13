@@ -146,4 +146,5 @@ npm run start
 | error              | Server → Client | `{ message }`                                         | -                                  | Notifies of a server-side error                  |
 | payload_error      | Server → Client | `{ message }`                                         | -                                  | Notifies of invalid payload from client          |
 
+- Send the value of `token` recieved from `login` route in the headers(key=Token) while connecting to socket server.
 ---
