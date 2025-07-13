@@ -69,6 +69,7 @@ git clone https://github.com/Ajay-sys2-tech/user-onboarding-socketio.git
 cd user-onboarding-socketio
 npm install
 npm run dev
+```
 
 ---
 
@@ -77,6 +78,7 @@ npm run dev
 ```bash
 npm run seed:user
 npm run seed:question
+```
 
 ---
 
@@ -94,4 +96,17 @@ npm run seed:question
 - `userAuth` is required for onboarding question routes.
 - `adminAuth` is required for analytics.
 - Auth routes (`/signup`, `/login`) do not require authentication.
+
+---
+
+## Socket Events
+| Event Name         | Direction | Payload (example)                                         | Emits/Receives (by server)         | Description                                      |
+|--------------------|-----------|----------------------------------------------------------|------------------------------------|--------------------------------------------------|
+| start_onboarding   | Client → Server | `{ userId }`                                         | Emits: `question`, `complete`, `error` | Starts onboarding, sends next question, complete, or error |
+| answer             | Client → Server | `{ userId, questionId, answer, questionNumber }`      | Emits: `question`, `complete`, `payload_error`, `error` | Receives answer, sends next question, complete, or error |
+| disconnect         | Client → Server | *(none)*                                              | *(none)*                           | Handles user disconnect                          |
+| question           | Server → Client | `{ questionNumber, questionId, text, type, options }` | -                                  | Sends next onboarding question                   |
+| complete           | Server → Client | `{ message }`                                         | -                                  | Notifies onboarding is complete                  |
+| error              | Server → Client | `{ message }`                                         | -                                  | Notifies of a server-side error                  |
+| payload_error      | Server → Client | `{ message }`                                         | -                                  | Notifies of invalid payload from
 
