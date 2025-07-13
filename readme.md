@@ -65,7 +65,33 @@ This backend server supports an onboarding chat interface where users answer pre
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/chat-onboarding-socketio.git
+git clone https://github.com/Ajay-sys2-tech/user-onboarding-socketio.git
 cd user-onboarding-socketio
 npm install
-nom run dev
+npm run dev
+
+---
+
+### Database seeding
+
+```bash
+npm run seed:user
+npm run seed:question
+
+---
+
+## API Routes Table
+
+| Route (Full Path)                        | Method | Auth Middleware | Description                        |
+|-------------------------------------------|--------|----------------|------------------------------------|
+| `/api/auth/signup`                       | POST   | None           | User/Admin signup                  |
+| `/api/auth/login`                        | POST   | None           | User/Admin login                   |
+| `/api/onboarding/questions`              | GET    | userAuth       | Get all onboarding questions       |
+| `/api/onboarding/questions/:id`          | GET    | userAuth       | Get a specific question by ID      |
+| `/api/onboarding/questions/order/:order` | GET    | userAuth       | Get question by order/number       |
+| `/api/analytics/drop-off`                | GET    | adminAuth      | Get user drop-off analytics        |
+
+- `userAuth` is required for onboarding question routes.
+- `adminAuth` is required for analytics.
+- Auth routes (`/signup`, `/login`) do not require authentication.
+
