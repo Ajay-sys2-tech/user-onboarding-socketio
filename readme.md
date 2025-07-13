@@ -134,22 +134,20 @@ npm run start
 - `role` is optional for user.
 - for testing user:
   ```json
-  {
-    "username": "user1",
-    "password": "password"
-  }
+    {
+      "username": "user1",
+      "password": "password"
+    }
   ```
 
 - for testing admin:
-
-```json
-  {
-    "username": "admin",
-    "password": "admin",
-    "role": "admin"
-  }
+  ```json
+    {
+      "username": "admin",
+      "password": "admin",
+      "role": "admin"
+    }
   ```
-
 ---
 
 ## Socket Events

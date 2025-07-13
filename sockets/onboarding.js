@@ -7,9 +7,10 @@ module.exports = (socket) => {
     console.log(`User ${userId} started onboarding`);
    
     try {
-      await User.findByIdAndUpdate(userId, {
-        chatStatus: 0 // Update user's chat status
-      });
+      await User.findOneAndUpdate(
+        { _id: userId, chatStatus: -1 },       
+        { $set: { chatStatus: 0 } },   
+      ); 
 
       const answered = await Answer.find({ userId });
       const answeredQuestionIds = answered.map(a => a.questionId);
